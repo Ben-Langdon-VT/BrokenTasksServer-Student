@@ -1,4 +1,6 @@
+require('dotenv').config();
 const jwt = require('jsonwebtoken');
+const {User} = require('../models');
 
 
 const validateSession = async (req,next) => {
@@ -10,7 +12,7 @@ const validateSession = async (req,next) => {
         const user = await User.findById(decoded.id);
         if(!user) throw new Error(`User not found`);
 
-        req.user;
+        req.user = user;
 
         
 

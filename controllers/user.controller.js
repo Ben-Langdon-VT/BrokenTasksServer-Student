@@ -1,5 +1,6 @@
+require('dotenv').config()
 const router = require('express').Router();
-const bcrypt = require('bcrypts');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const SECRET = process.env.JWT;
 const expiresIn = {expiresIn: "1 day"};
@@ -48,7 +49,7 @@ router.post('/login', async(req,res) => {
         let token;
 
         if(user) {
-            const match = await bcrypt.compare(password, password);
+            const match = await bcrypt.compare(password, user.password);
 
             if(!match) throw new Error(`Email or Password do not match`);
 

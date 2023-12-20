@@ -1,6 +1,8 @@
 
-const connection = process.env.DB;
-const collection = process.env;
+require('dotenv').config();
+const connection = process.env.MONGO;
+const collection = process.env.COLL;
+const mongoose = require("mongoose");
 
 const db = async () => {
     try {
@@ -16,4 +18,4 @@ const db = async () => {
     }
 }
 
-module.exports = { db, mongoose };
+module.exports = { db};

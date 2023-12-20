@@ -1,4 +1,4 @@
-const router = require('express');
+const router = require('express').Router();
 const { Task } = require('../models');
 const { errorHandling, successHandling, incompleteHandling } = require('../helpers');
 const validateSession = require('../middleware/validate-session');
@@ -8,7 +8,7 @@ router.post('/', validateSession, async(req,res) => {
     try {
         
         const { title, details, completed } = req.body;
-        const {id} = req.user;
+        const {id} = req.user.id;
 
         const task = new Task({
             date: req.date.date,
@@ -33,7 +33,7 @@ router.post('/', validateSession, async(req,res) => {
 router.get('/all-tasks', async(req,res) => {
     try {
 
-        const { id } = req.user;
+        const { id } = req.user.id;
 
         const tasks = await Task.find({user_id: id});
 
@@ -68,7 +68,7 @@ router.get('/get-one/:id', validateSession, async(req,res) => {
 router.put('/:id', validateSession, async(req,res) => {
     try {
         
-        const userId = req.id;
+        const userId = req.user.id;
         const date = req.date;
         const taskId = req.params;
         const {title,details,completed} = req.body;
@@ -109,3 +109,4 @@ router.delete('/:id', validateSession, async(req,res) => {
     }
 })
 
+module.exports = router;
