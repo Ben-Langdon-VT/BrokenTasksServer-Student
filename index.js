@@ -1,7 +1,7 @@
 require('dotenv').config(); 
 const express = require('express');
 const app = express();
-const PORT = process.env.PORT;
+const PORT = Number(process.env.PORT);
 
 //! Imports
 const {db} = require('./db');
@@ -19,8 +19,8 @@ app.use('/task', taskController);
 //! Connection
 const server = async () => {
     db();
-
     app.listen(PORT, () => console.log(`Server on Port ${PORT}`));
+    
 }
 
 server();

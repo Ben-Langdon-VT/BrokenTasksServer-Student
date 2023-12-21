@@ -8,9 +8,8 @@ const { User } = require('../models');
 const { errorHandling, successHandling, incompleteHandling } = require('../helpers');
 
 //! Signup
-router.post('/signup', async() => {
+router.post('/signup', async(req,res) => {
     try {
-
         const { email, password } = req.body;
         
         const user = User({
